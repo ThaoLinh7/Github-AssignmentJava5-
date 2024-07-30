@@ -1,0 +1,110 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <section class="row" layout:fragment="content">
+        <div class="col mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2>List of Orders</h2>
+                </div>
+                <div class="card-body">
+                    <div th:if="${message != null}" class="alert alert-primary" role="alert">
+                        <i>[[${message}]]</i>
+                    </div>
+
+                    <div class="row mt-2 mb-2">
+                        <div class="col"> 
+                            <form th:action="@{/admin/orders/search}" class="form-inline">
+                              
+                                <a class="btn btn-outline-danger" th:href="@{/admin/orders/add}">Add New Order</a>
+                            </form>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped table-inverse">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Order Date</th>
+                                <th>Customer ID</th>
+                                <th>Amount</th>
+<!--                                 <th>Name</th> -->
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="order : ${orderPage.content}">
+                                <td scope="row" th:text="${order.orderId}"></td>
+                                <td th:text="${order.orderDate}"></td>
+                                <td th:text="${order.customer.customerId}"></td>
+                                <td th:text="${order.amount}"></td>
+<!--                                 <td th:text="${order.name}"></td> -->
+                                <td>
+                                 
+                                    <a th:href="@{'/admin/orders/edit/' + ${order.orderId}}"
+                                        class="btn btn-outline-warning"><i class="fas fa-edit">Update</i></a>
+                                    <a th:href="@{'/admin/orders/delete/' + ${order.orderId}}"
+                                        class="btn btn-outline-danger"><i class="fas fa-recycle">Delete</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col">
+                            <form action="" class="form-inline float-left">
+                                <label for="size">Page Size: </label>
+                                <select name="size" id="size" class="form-control ml-2" onchange="this.form.submit()">
+                                    <option th:selected="${orderPage.size == 5}" value="5">5</option>
+                                    <option th:selected="${orderPage.size == 10}" value="10">10</option>
+                                    <option th:selected="${orderPage.size == 15}" value="15">15</option>
+                                    <option th:selected="${orderPage.size == 20}" value="20">20</option>
+                                    <option th:selected="${orderPage.size == 30}" value="30">30</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" th:classappend="${orderPage.hasPrevious()} ? '' : 'disabled'">
+                                <a class="page-link"
+                                    th:href="@{/admin/orders/search(page=${orderPage.number - 1}, size=${orderPage.size}, orderId=${orderId})}"
+                                    aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:each="i : ${#numbers.sequence(0, orderPage.totalPages - 1)}"
+                                th:classappend="${orderPage.number == i} ? 'active'">
+                                <a class="page-link"
+                                    th:href="@{/admin/orders/search(page=${i}, size=${orderPage.size}, orderId=${orderId})}"
+                                    th:text="${i + 1}"></a>
+                            </li>
+                            <li class="page-item" th:classappend="${orderPage.hasNext()} ? '' : 'disabled'">
+                                <a class="page-link"
+                                    th:href="@{/admin/orders/search(page=${orderPage.number + 1}, size=${orderPage.size}, orderId=${orderId})}"
+                                    aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+
+</head>
+
+<body>
+    <section class="row" layout:fragment="content">
+        <div class="col-6 offset-3 mt-4">
+            <form th:action="@{/admin/orders/saveOrUpdate}" method="post" th:object="${order}">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Add New Order</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="orderId">Order ID:</label>
+                            <input type="hidden" th:field="*{isEdit}">
+                            <input type="text" class="form-control" th:field="*{orderId}"
+                                aria-describedby="orderIdHid" placeholder="Order ID" readonly>
+                            <small th:if="${#fields.hasErrors('orderId')}" id="orderIdHid"
+                                class="form-text text-muted">Order ID</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="orderDate">Order Date:</label>
+                            <input type="date" th:field="*{orderDate}" id="orderDate" class="form-control"
+                                aria-describedby="orderDateHid" placeholder="Order Date">
+                            <small th:if="${#fields.hasErrors('orderDate')}" id="orderDateHid"
+                                class="form-text text-muted">Order Date is required</small>
+                        </div>
+
+                       <div class="form-group">
+                            <label for="customerId">Customer :</label>
+                            <select th:field="*{customerId}" class="form-control" id="customerId">
+                                <option th:each="customer : ${customers}"
+                                        th:value="${customer.customerId}"
+                                        th:text="${customer.name}"></option>
+                            </select>
+                            <small th:if="${#fields.hasErrors('customerId')}" class="form-text text-muted">Customer is required</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="text" th:field="*{amount}" id="amount" class="form-control"
+                                aria-describedby="amountHid" placeholder="Amount">
+                            <small th:if="${#fields.hasErrors('amount')}" id="amountHid"
+                                class="form-text text-muted">Amount is required</small>
+                        </div>
+
+<!--                         <div class="form-group"> -->
+<!--                             <label for="name">Name:</label> -->
+<!--                             <input type="text" th:field="*{name}" id="name" class="form-control" -->
+<!--                                 aria-describedby="statusHid" placeholder="Name"> -->
+<!--                             <small th:if="${#fields.hasErrors('name')}" id="statusHid" -->
+<!--                                 class="form-text text-muted">Status is required</small> -->
+<!--                         </div> -->
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <a th:href="@{/admin/orders/search}" class="btn btn-success">List Orders</a>
+                        <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i>
+                            <span th:if="${order.isEdit}">Update</span>
+                            <span th:unless="${order.isEdit}">Save</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

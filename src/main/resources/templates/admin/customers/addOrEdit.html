@@ -1,0 +1,91 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+
+</head>
+
+<body>
+    <section class="row" layout:fragment="content">
+        <div class="col-6 offset-3 mt-4">
+            <form th:action="@{/admin/customers/saveOrUpdate}" action="" method="post" th:object="${customer}">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Add New Customer</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="customerId">Customer ID:</label>
+                            <input type="hidden" th:field="*{isEdit}">
+                            <input type="text" class="form-control" th:field="*{customerId}"
+                                aria-describedby="customerIdHid" placeholder="Customer ID" readonly>
+                            <small th:if="${#fields.hasErrors('customerId')}" id="customerIdHid"
+                                class="form-text text-muted">Customer ID</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" th:field="*{name}" id="name" class="form-control"
+                                aria-describedby="nameHid" placeholder="Customer Name">
+                            
+                                                            <small th:if="${#fields.hasErrors('name')}" id="nameHid" class="form-text text-muted">Name is required</small>
+                                
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" th:field="*{email}" id="email" class="form-control"
+                                aria-describedby="emailHid" placeholder="Customer Email">
+                            <small th:if="${#fields.hasErrors('email')}" id="emailHid"
+                                class="form-text text-muted">Email is required</small>
+                        </div>
+                        
+                          <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" th:field="*{password}" id="password" class="form-control"
+                                aria-describedby="passwordHid" placeholder="Customer password">
+                            <small th:if="${#fields.hasErrors('password')}" id="passwordlHid"
+                                class="form-text text-muted">password is required</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input type="text" th:field="*{phone}" id="phone" class="form-control"
+                                aria-describedby="phoneHid" placeholder="Customer Phone">
+                            <small th:if="${#fields.hasErrors('phone')}" id="phoneHid"
+                                class="form-text text-muted">Phone is required</small>
+                        </div>
+
+       <div class="form-group">
+                            <label for="registeredDate">Registered Date:</label>
+                            <input type="Date" th:field="*{registeredDate}" id="registeredDate" class="form-control"
+                                aria-describedby="registeredDateHid" placeholder="Customer registeredDate">
+                            <small th:if="${#fields.hasErrors('registeredDate')}" id="registeredDateHid"
+                                class="form-text text-muted">Email is required</small>
+                        </div>
+                        
+                          <div class="form-group">
+                            <label for="status">Status:</label>
+                            <input type="text" th:field="*{status}" id="status" class="form-control"
+                                aria-describedby="emailHid" placeholder="Customer status">
+                            <small th:if="${#fields.hasErrors('status')}" id="statusHid"
+                                class="form-text text-muted">Status is required</small>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <a th:href="@{/admin/customers/search}" class="btn btn-success">List Customers</a>
+                        <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i>
+                            <span th:if="${customer.isEdit}">Update</span>
+                            <span th:unless="${customer.isEdit}">Save</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

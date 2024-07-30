@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+</head>
+<body>
+   <div th:fragment="nav">
+      <nav  class="navbar navbar-expand-sm navbar-light bg-danger bg-body-warming">
+         <div class="container-fluid">
+         <img  alt="" style="width: 200px ; height: 100px " src="https://mms.img.susercontent.com/vn-11134233-7r98o-ltq5w03ebmrxa7 ">
+<!--            <a class="navbar-brand" href="#">Lem-Shop</a> -->
+           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item">
+                 <a class="nav-link active" aria-current="page" th:href="@{/admin/homes/home}" style="color: white;" >Home</a>
+               </li>
+               <li class="nav-item">
+                 <a class="nav-link" th:href="@{/admin/customers/search}" style="color: white;">Manage Customer</a>
+               </li>
+              <li class="nav-item">
+               <a class="nav-link" th:href="@{/admin/categories/search}" style="color: white;">Manage Category</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" th:href="@{/admin/products/search}" style="color: white;">Manage Product</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" th:href="@{/admin/orders/search}" style="color: white;">Manage Order</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" th:href="@{/admin/accounts/search}" style="color: white;">Manage Profile</a>
+             </li>
+             <li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+							href="#" role="button" aria-expanded="false">Option</a>
+							<ul class="dropdown-menu">
+								
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" th:href="@{/register/index}">Đăng kí</a></li>
+										<li><a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a></li>
+							</ul></li>
+             </ul>
+             <form class="d-flex" role="search">
+               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+               <button class="btn btn-outline-info" type="submit" style="color: white;">Search</button>
+             </form>
+              
+           </div>
+         </div>
+       </nav>
+   </div> 
+</body>
+</html>

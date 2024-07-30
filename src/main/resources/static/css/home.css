@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+.offcanvas-background {
+	background-image:
+		url('https://static.tuoitre.vn/tto/i/s626/2015/09/03/cho-meo-12-1441255605.jpg');
+	/* Thay URL_CUA_ANH bằng đường dẫn ảnh của bạn */
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 100%;
+	width: 100%;
+}
+.offcanvas-body{
+	width:400px;
+	margin-left: 20px;
+	margin-top: 30px;
+	height: 600px;
+}
+.welcome{
+	border: 2px solid white;
+	 border-radius: 70px;
+	 padding: 15px;
+}

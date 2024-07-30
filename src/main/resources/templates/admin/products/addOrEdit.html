@@ -1,0 +1,111 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+
+</head>
+
+<body>
+    <section class="row" layout:fragment="content">
+        <div class="col-6 offset-3 mt-4">
+            <form th:action="@{/admin/products/saveOrUpdate}" action="" method="post" th:object="${product}">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Add New product</h2>
+                    </div>
+                    <div class="card-body row g-3">
+                        <div class="form-group">
+                            <label for="productId">Product ID:</label>
+                            <input type="hidden" th:field="*{isEdit}">
+                            <input type="text" class="form-control" th:field="*{productId}"
+                                aria-describedby="productIdHid" placeholder="product ID" readonly>
+                            <small th:if="${#fields.hasErrors('productId')}" id="productIdHid"
+                                class="form-text text-muted">product Id</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" th:field="*{name}" id="name" class="form-control"
+                                aria-describedby="nameHid" placeholder="product Name">
+                            <small th:if="${#fields.hasErrors('name')}" id="nameHid" class="form-text text-muted">Name
+                                is required</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Quantity:</label>
+                            <input type="text" th:field="*{quantity}" id="quantity" class="form-control"
+                                aria-describedby="quantityHid" placeholder="product quantity">
+                            <small th:if="${#fields.hasErrors('quantity')}" id="quantityHid"
+                                class="form-text text-muted">Quantity is required</small>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="unitPrice">UnitPrice:</label>
+                            <input type="text" th:field="*{unitPrice}" id="unitPrice" class="form-control"
+                                aria-describedby="unitPriceHid" placeholder="product UnitPrice">
+                            <small th:if="${#fields.hasErrors('unitPrice')}" id="unitPriceHid"
+                                class="form-text text-muted">UnitPrice is required</small>
+                        </div>
+                          <div class="form-group col-md-6">
+                            <label for="discount">Discount:</label>
+                            <input type="text" th:field="*{discount}" id="discount" class="form-control"
+                                aria-describedby="discountHid" placeholder="product discount">
+                            <small th:if="${#fields.hasErrors('discount')}" id="DiscountHid"
+                                class="form-text text-muted">Discount is required</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <input type="text" th:field="*{description}" id="description" class="form-control"
+                                aria-describedby="descriptionHid" placeholder="product description">
+                            <small th:if="${#fields.hasErrors('description')}" id="DescriptionHid"
+                                class="form-text text-muted">Description is required</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image:</label>
+                            <input type="file" th:field="*{image}" id="image" class="form-control"
+                                aria-describedby="ImageHid" placeholder="product image">
+                            <small th:if="${#fields.hasErrors('image')}" id="ImageHid"
+                                class="form-text text-muted">Image is required</small>
+                        </div>
+                      
+                        <div class="form-group">
+                            <label for="enteredDate">EnteredDate:</label>
+                            <input type="date" th:field="*{enteredDate}" id="enteredDate" class="form-control"
+                                aria-describedby="enteredDateHid" placeholder="product enteredDate">
+                            <small th:if="${#fields.hasErrors('enteredDate')}" id="EnteredDateHid"
+                                class="form-text text-muted">EnteredDate is required</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <input type="text" th:field="*{status}" id="status" class="form-control"
+                                aria-describedby="StatusHid" placeholder="product status">
+                            <small th:if="${#fields.hasErrors('status')}" id="StatusHid"
+                                class="form-text text-muted">Status is required</small>
+                        </div>
+                       <div class="form-group">
+                            <label for="categoryId">Category :</label>
+                            <select th:field="*{categoryId}" class="form-control" id="categoryId">
+                                <option th:each="category : ${categories}"
+                                        th:value="${category.categoryId}"
+                                        th:text="${category.name}"></option>
+                            </select>
+                            <small th:if="${#fields.hasErrors('categoryId')}" class="form-text text-muted">Category is required</small>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <a th:href="@{/admin/products/search}" class="btn btn-success">List products</a>
+                        <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i>
+                            <span th:if="${product.isEdit}">Update</span>
+                            <span th:unless="${product.isEdit}">Save</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

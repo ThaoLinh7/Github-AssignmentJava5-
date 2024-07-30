@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{site/dashboardLayout.html}">
+
+<head>
+    <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <div layout:fragment="content">
+    <div class="container-fluid row col-12 ">
+			<div class="col-4 mt-2">
+
+
+				<div class=" offcanvas-background">
+					<div class="">
+						<h5 class="offcanvas-title text-white text-center pt-5" id="">DANH
+							MỤC</h5>
+
+					</div>
+					<div class="offcanvas-body ">
+						<div class="list-group">
+							<button type="button"
+								class="list-group-item list-group-item-action "
+								aria-current="true">Doanh thu theo ngày</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">Doanh
+								thu theo tháng</button>
+							<a type="button" th:href="@{/admin/products/search}"
+								class="list-group-item list-group-item-action nav-link ">Quản
+								lí tài khoản</a>
+							<button type="button"
+								class="list-group-item list-group-item-action">Đăng
+								xuất</button>
+
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+			<!-- cuon -->
+			<div class="col-8">
+				
+
+				
+	 <h1>Your Cart</h1>
+        <div th:if="${cart.items.isEmpty()}">
+            <p>Your cart is empty</p>
+        </div>
+        <div th:if="${!cart.items.isEmpty()}">
+            <ul class="list-group">
+                <li th:each="item : ${cart.items}" class="list-group-item d-flex justify-content-between align-items-center">
+                    <span th:text="${item.name}">Product Name</span>
+                    <span th:text="${item.quantity}">Quantity</span>
+                    <span th:text="${item.unitPrice}">Price</span>
+                    <form th:action="@{/cart/remove/{cartItemId}(cartItemId=${item.cartItemId})}" method="post">
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form> 
+                </li>
+            </ul>
+            <div class="mt-4">
+                <h4>Total: <span th:text="${total}"></span></h4>
+            </div>
+        </div>
+    </div>
+    
+<hr class="mt-5">
+<div class="mt-5 text-center text-white welcome bg-success">
+
+<h4>Chào mừng đến với LEM - Thiên đường cho thú cưng của bạn! </h4>
+Tại LEM SHOP, chúng tôi hiểu rằng thú cưng không chỉ là những người bạn bốn chân mà còn là một phần quan trọng của gia đình bạn. Chúng tôi cam kết mang đến những sản phẩm và dịch vụ tốt nhất để chăm sóc và nuôi dưỡng thú cưng của bạn, từ những chú chó năng động đến những chú mèo dễ thương.</div>
+
+				<nav id="navbar-example2"
+					class="navbar bg-body-tertiary px-3 mb-3 mt-5">
+					<a class="navbar-brand" href="#">LEMSHOP</a>
+					<ul class="nav ">
+						<li class="nav-item"><a class="nav-link"
+							href="#scrollspyHeading4">Sản Phẩm Nổi Bật</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#scrollspyHeading5">Dịch Vụ Chất Lượng</a></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+							href="#" role="button" aria-expanded="false">Dropdown</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#scrollspyHeading6">Ưu
+										Đãi Đặc Biệt</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="#scrollspyHeading5">Kết
+										Nối Với Chúng Tôi</a></li>
+							</ul></li>
+					</ul>
+				</nav>
+
+				<div data-bs-spy="scroll" data-bs-target="#navbar-example2"
+					data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
+					class="scrollspy-example bg-body-tertiary p-3 rounded-2"
+					tabindex="0">
+					<h4 id="scrollspyHeading">Sản Phẩm Nổi Bật</h4>
+					<p>
+					<li><h6>Thức ăn chất lượng cao:</h6>Chúng tôi cung cấp các
+						loại thức ăn dinh dưỡng, an toàn và ngon miệng từ các thương hiệu
+						uy tín, đảm bảo sức khỏe và sự phát triển của thú cưng.</li>
+					<li><h6>Phụ kiện thời trang:</h6> Từ vòng cổ, dây dắt, đến
+						quần áo và giày dép thời trang, chúng tôi có mọi thứ để thú cưng
+						của bạn luôn sành điệu và thoải mái.</li>
+					<li><h6>Đồ chơi và vật dụng chăm sóc:</h6> Đồ chơi sáng tạo và
+						các vật dụng chăm sóc như bàn chải, giường ngủ, và nhà vệ sinh
+						giúp thú cưng luôn vui vẻ và khỏe mạnh.</li>
+					</p>
+
+					<h4 id="scrollspyHeading3">Dịch Vụ Chất Lượng</h4>
+					<p>
+					<li><h6>Tư vấn dinh dưỡng:</h6> Đội ngũ nhân viên giàu kinh
+						nghiệm của chúng tôi sẵn sàng tư vấn và giúp bạn chọn lựa thức ăn
+						phù hợp nhất cho thú cưng của mình.</li>
+					<li><h6>Chăm sóc thú cưng:</h6> Chúng tôi cung cấp các dịch vụ
+						chăm sóc chuyên nghiệp như tắm, cắt tỉa lông và chăm sóc sức khỏe
+						thú cưng.</li>
+					<li><h6>Giao hàng tận nơi:</h6> Dịch vụ giao hàng nhanh chóng
+						và thuận tiện đến tận cửa nhà bạn, giúp bạn tiết kiệm thời gian và
+						công sức.</li>
+					</p>
+
+					<h4 id="scrollspyHeading4">Ưu Đãi Đặc Biệt</h4>
+					<p>
+					<li><h6>Khuyến mãi:</h6> Theo dõi các chương trình khuyến mãi
+						và giảm giá hấp dẫn trên trang web của chúng tôi để nhận được
+						những ưu đãi tốt nhất.</li>
+					<li><h6>Thẻ thành viên:</h6> Đăng ký thẻ thành viên để tích
+						lũy điểm và nhận được nhiều ưu đãi đặc biệt hơn.</li>
+					</p>
+
+					<h4>Kết Nối Với Chúng Tôi</h4>
+					<p id="scrollspyHeading5">Blog & Tin tức: Cập nhật các bài viết
+						và tin tức mới nhất về chăm sóc thú cưng trên blog của chúng tôi.</p>
+
+					<h4 id="scrollspyHeading6"></h4>
+
+				</div>
+			</div>
+
+
+		</div>
+
+    
+       
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
